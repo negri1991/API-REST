@@ -1,4 +1,4 @@
-package es.MueblesCastilla.MueblesCastilla.domain.repository;
+package es.MueblesCastilla.MueblesCastilla.persistance.repository;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,8 +6,9 @@ import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 import es.MueblesCastilla.MueblesCastilla.domain.dto.DetalleCompraPojo;
+import es.MueblesCastilla.MueblesCastilla.domain.repository.IDetalleCompraRepository;
+import es.MueblesCastilla.MueblesCastilla.persistance.crud.IDetalleCompraCrudRepository;
 import es.MueblesCastilla.MueblesCastilla.persistance.mapper.IDetalleCompraMapper;
-import es.MueblesCastilla.MueblesCastilla.persistance.repository.IDetalleCompraCrudRepository;
 import lombok.RequiredArgsConstructor;
 
 /**

@@ -1,11 +1,11 @@
-package es.MueblesCastilla.MueblesCastilla.domain.service;
+package es.MueblesCastilla.MueblesCastilla.domain.userCase;
 
 import java.util.List;
 import java.util.Optional;
 
 import es.MueblesCastilla.MueblesCastilla.domain.dto.ProductoPojo;
 
-public interface IProductoService {
+public interface IProductoUseCase {
 
 	/**
 	  * Devuelve una lista con todos los Producto
@@ -18,6 +18,13 @@ public interface IProductoService {
 	 * @return Optional de Producto
 	 */
 	Optional<ProductoPojo> getProductoById(Integer id);//Optional evita la exception nullPointerException
+	
+	/**
+	 * Devuelve un producto dado su nombre
+	 * @param nombre de producto
+	 * @return Optional de producto
+	 */
+	List<ProductoPojo> findByName(String nombre);//Optional evita la exception 
 	
 	/**
 	 * Guarda un Producto

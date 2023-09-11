@@ -19,6 +19,7 @@ public interface ICompraRepository {
 	 */
 	Optional<CompraPojo> getCompraById(Integer id);//Optional evita la exception nullPointerException
 
+
 	/**
 	 * Guarda una compra
 	 * @param newCompra Compra a guardar

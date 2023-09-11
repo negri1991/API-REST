@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import es.MueblesCastilla.MueblesCastilla.domain.dto.DetalleCompraPojo;
 import es.MueblesCastilla.MueblesCastilla.domain.repository.IDetalleCompraRepository;
+import es.MueblesCastilla.MueblesCastilla.domain.userCase.IDetalleCompraUseCase;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -14,7 +15,7 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 @Service
-public class DetalleCompraService implements IDetalleCompraService{
+public class DetalleCompraService implements IDetalleCompraUseCase{
 	
 	private final IDetalleCompraRepository iDetalleCompraRepository;
 	

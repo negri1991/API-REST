@@ -1,13 +1,15 @@
-package es.MueblesCastilla.MueblesCastilla.domain.repository;
+package es.MueblesCastilla.MueblesCastilla.persistance.repository;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
+
 import es.MueblesCastilla.MueblesCastilla.domain.dto.ProductoPojo;
+import es.MueblesCastilla.MueblesCastilla.domain.repository.IProductoRepository;
+import es.MueblesCastilla.MueblesCastilla.persistance.crud.IProductoCrudRepository;
 import es.MueblesCastilla.MueblesCastilla.persistance.mapper.IProductoMapper;
-import es.MueblesCastilla.MueblesCastilla.persistance.repository.IProductoCrudRepository;
 import lombok.RequiredArgsConstructor;
 /**
  * Repositorio de Producto (es el que se conecta a la base de datos DAO)
@@ -76,6 +78,10 @@ public ProductoPojo save(ProductoPojo newProducto) {
 public void delete(Integer idProducto) {
 	iProductoCrudRepository.deleteById(idProducto);
 	
+}
+@Override
+public List<ProductoPojo> findByName(String nombre) {
+	return iProductoMapper.toProductoPojo(iProductoCrudRepository.findByNombre(nombre));
 }
 
 }

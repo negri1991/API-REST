@@ -7,19 +7,16 @@ import org.springframework.stereotype.Service;
 
 import es.MueblesCastilla.MueblesCastilla.domain.dto.UsuarioPojo;
 import es.MueblesCastilla.MueblesCastilla.domain.repository.IUsuarioRepository;
+import es.MueblesCastilla.MueblesCastilla.domain.userCase.IUsuarioUseCase;
 import es.MueblesCastilla.MueblesCastilla.exception.EmailValidationException;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
-import lombok.extern.log4j.Log4j;
-import lombok.extern.log4j.Log4j2;
-import lombok.extern.slf4j.Slf4j;
+
 /**
  * Servicio Usuario (Son todas las validaciones que lleva).
  */
 @RequiredArgsConstructor
 @Service
-@Slf4j
-public class UsuarioService implements IUsuarioService{
+public class UsuarioService implements IUsuarioUseCase{
 	
 	private final IUsuarioRepository iUsuarioRepository;
 	

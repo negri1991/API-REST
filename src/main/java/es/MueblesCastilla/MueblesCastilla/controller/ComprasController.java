@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.MueblesCastilla.MueblesCastilla.domain.dto.CompraPojo;
-import es.MueblesCastilla.MueblesCastilla.domain.service.ICompraService;
+import es.MueblesCastilla.MueblesCastilla.domain.userCase.ICompraUseCase;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/compras")
 public class ComprasController {
 
-	private final ICompraService iCompraService;
+	private final ICompraUseCase iCompraService;
 
 	/**
 	 * Devuelve lista de compras

@@ -13,6 +13,6 @@ public class ProductoPojo {
 	private double precio;
 	private int cantidad;
 	private String descripcion;
-	 
+	private Integer idUsuario;
 
 }

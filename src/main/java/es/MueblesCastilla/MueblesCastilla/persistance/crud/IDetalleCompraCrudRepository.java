@@ -1,4 +1,4 @@
-package es.MueblesCastilla.MueblesCastilla.persistance.repository;
+package es.MueblesCastilla.MueblesCastilla.persistance.crud;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

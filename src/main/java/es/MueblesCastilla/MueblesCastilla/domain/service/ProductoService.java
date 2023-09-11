@@ -2,11 +2,13 @@ package es.MueblesCastilla.MueblesCastilla.domain.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
 import es.MueblesCastilla.MueblesCastilla.domain.dto.ProductoPojo;
 import es.MueblesCastilla.MueblesCastilla.domain.repository.IProductoRepository;
+import es.MueblesCastilla.MueblesCastilla.domain.userCase.IProductoUseCase;
 import lombok.RequiredArgsConstructor;
 
 	/**
@@ -14,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 	 */
 	@RequiredArgsConstructor
 	@Service
-	public class ProductoService implements IProductoService{
+	public class ProductoService implements IProductoUseCase{
 		
 		private final IProductoRepository iProductoRepository;
 		
@@ -38,6 +40,19 @@ import lombok.RequiredArgsConstructor;
 		public Optional<ProductoPojo> getProductoById(Integer id) {
 			
 			return iProductoRepository.getProductoById(id);
+		}
+		
+		/**
+		 * Retorna un opcional dada su nombre
+		 * @param nombre de Producto
+		 * @return Opcional de ProductoPojo
+		 */
+		@Override
+		public List<ProductoPojo> findByName(String nombre) {
+			List<ProductoPojo> productos = iProductoRepository.getAll().stream().filter(p -> p.getNombre().toLowerCase().contains(nombre.toLowerCase()) || p.getNombre().toUpperCase().contains(nombre.toUpperCase())).collect(Collectors.toList());
+			List<ProductoPojo> productos2 = iProductoRepository.getAll().stream().filter(p -> p.getDescripcion().toLowerCase().contains(nombre.toLowerCase()) || p.getDescripcion().toUpperCase().contains(nombre.toUpperCase())).collect(Collectors.toList());
+			productos.addAll(productos2);
+			return productos;
 		}
 		
 		/**

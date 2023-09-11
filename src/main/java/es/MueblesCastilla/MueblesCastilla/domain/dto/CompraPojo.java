@@ -1,7 +1,6 @@
 package es.MueblesCastilla.MueblesCastilla.domain.dto;
 
 import java.util.Date;
-import java.util.List;
 
 
 import lombok.Getter;
@@ -16,7 +15,6 @@ public class CompraPojo {
 	private Date fechaCreacion;
 	private Date fechaRecibida;
 	private double total;
-	private UsuarioPojo usuario;
-	private List<DetalleCompraPojo> detalleCompra;
+	private Integer idUsuario;
 
 }

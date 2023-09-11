@@ -3,6 +3,7 @@ package es.MueblesCastilla.MueblesCastilla.persistance.mapper;
 import java.util.List;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import es.MueblesCastilla.MueblesCastilla.domain.dto.CompraPojo;
 import es.MueblesCastilla.MueblesCastilla.persistance.entity.Compra;
@@ -38,6 +39,8 @@ import es.MueblesCastilla.MueblesCastilla.persistance.entity.Compra;
 	     * @return Entity convertido
 	     */
 	  //@InheritInverseConfiguration NO LO UTILIZO PORQUE TIENEN EL MISMO NOMBRE
+	    @Mapping(target = "usuario", ignore = true)//ignoramos los objetos
+	    @Mapping(target = "detalleCompra", ignore = true)//ignoramos los objetos
 	    Compra toCompraEntity(CompraPojo compraPojo);
 
 	    /**

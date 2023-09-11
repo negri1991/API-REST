@@ -1,14 +1,13 @@
 package es.MueblesCastilla.MueblesCastilla.persistance.entity;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -27,30 +26,32 @@ public class Compra {
 	private String numero;
 	private Date fechaCreacion;
 	private Date fechaRecibida;
-
+	private Integer idUsuario;
 	private double total;
-	
-	@ManyToOne//Muchas compras por un usuario.
-	private Usuario usuario;
-	
+		
+	   @OneToMany(mappedBy = "compra", cascade = {CascadeType.ALL})
+	    private List<DetalleCompra> detalleCompra;
 
-	@ManyToMany(mappedBy = "compras")
-	private Set<Producto> productos = new HashSet<>();
+	    @ManyToOne//Muchas compras por un usuario.
+	    @JoinColumn(name = "idUsuario", insertable = false, updatable = false)
+	    private Usuario usuario;
 
 	public Compra() {
 
 	}
 
-
-	public Compra(Integer id, String numero, Date fechaCreacion, Date fechaRecibida, double total, Usuario usuario,
-			List<DetalleCompra> detalle, Set<Producto> productos) {
+	public Compra(Integer id, String numero, Date fechaCreacion, Date fechaRecibida, Integer idUsuario, double total,
+			List<DetalleCompra> detalleCompra, Usuario usuario) {
 		super();
 		this.id = id;
 		this.numero = numero;
 		this.fechaCreacion = fechaCreacion;
 		this.fechaRecibida = fechaRecibida;
+		this.idUsuario = idUsuario;
 		this.total = total;
+		this.detalleCompra = detalleCompra;
 		this.usuario = usuario;
-		this.productos = productos;
 	}
+
+
 }

@@ -4,20 +4,17 @@ package es.MueblesCastilla.MueblesCastilla.persistance.entity;
 	
 	
 
-	import java.util.HashSet;
+
 import java.util.List;
-import java.util.Set;
 
 import jakarta.persistence.Entity;
 	import jakarta.persistence.GeneratedValue;
 	import jakarta.persistence.GenerationType;
 	import jakarta.persistence.Id;
-	import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-
-	import jakarta.persistence.Table;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,25 +32,22 @@ import lombok.Setter;
 		private double precio;
 		private int cantidad;
 		private String descripcion;
+		private Integer idUsuario;
 		
-		@ManyToOne//Muchos a uno
+		
+		@OneToMany(mappedBy = "producto")
+	    private List<DetalleCompra> detalleCompra;
+		
+		@ManyToOne
+		@JoinColumn(name = "idUsuario", insertable = false, updatable = false)
 		private Usuario usuario;
-		
-		
-		@ManyToMany
-		@JoinTable(
-				name = "detalle_compra2",
-		        joinColumns = @JoinColumn(name = "producto_id"),
-		        inverseJoinColumns = @JoinColumn(name = "compra_id")
-		    )
-		private Set<Compra> compras = new HashSet<>();
 
 		public Producto() {
 
 		}
 
 		public Producto(Integer id, String nombre, String imagen, double precio, int cantidad, String descripcion,
-				Usuario usuario, Producto producto, Set<Compra> compras) {
+				Integer idUsuario, List<DetalleCompra> detalleCompra, Usuario usuario) {
 			super();
 			this.id = id;
 			this.nombre = nombre;
@@ -61,9 +55,12 @@ import lombok.Setter;
 			this.precio = precio;
 			this.cantidad = cantidad;
 			this.descripcion = descripcion;
+			this.idUsuario = idUsuario;
+			this.detalleCompra = detalleCompra;
 			this.usuario = usuario;
-			this.compras = compras;
 		}
+
+
 
 	
 

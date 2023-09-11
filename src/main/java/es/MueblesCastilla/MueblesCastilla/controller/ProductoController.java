@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.MueblesCastilla.MueblesCastilla.domain.dto.ProductoPojo;
-import es.MueblesCastilla.MueblesCastilla.domain.service.IProductoService;
+import es.MueblesCastilla.MueblesCastilla.domain.userCase.IProductoUseCase;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/producto")
 public class ProductoController {
 
-	private final IProductoService iProductoService;
+	private final IProductoUseCase iProductoService;
 
 	/**
 	 * Devuelve lista de productos
@@ -50,6 +50,12 @@ public class ProductoController {
 
 		return ResponseEntity.of(iProductoService.getProductoById(id));
 	}
+	@GetMapping("/nombre/{nombre}")
+	public ResponseEntity<List<ProductoPojo>> getProductoByName(@PathVariable String nombre) {
+
+		return ResponseEntity.status(HttpStatus.OK).body(iProductoService.findByName(nombre));
+	}
+
 
 	
 

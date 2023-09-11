@@ -1,11 +1,11 @@
-package es.MueblesCastilla.MueblesCastilla.domain.service;
+package es.MueblesCastilla.MueblesCastilla.domain.userCase;
 
 import java.util.List;
 import java.util.Optional;
 
 import es.MueblesCastilla.MueblesCastilla.domain.dto.UsuarioPojo;
 
-public interface IUsuarioService {
+public interface IUsuarioUseCase {
 	/**
 	  * Devuelve una lista con todos los usuarios
 	  * @return Lista todos los usuario.

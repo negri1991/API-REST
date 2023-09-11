@@ -9,7 +9,6 @@ import lombok.Setter;
 public class DetalleCompraPojo {
 
 	private Integer id;
+	private double precio;
 	private double total;
-	private CompraPojo compra;
-	private ProductoPojo producto;
 }

@@ -1,4 +1,4 @@
-package es.MueblesCastilla.MueblesCastilla.domain.repository;
+package es.MueblesCastilla.MueblesCastilla.persistance.repository;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,8 +6,9 @@ import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 import es.MueblesCastilla.MueblesCastilla.domain.dto.UsuarioPojo;
+import es.MueblesCastilla.MueblesCastilla.domain.repository.IUsuarioRepository;
+import es.MueblesCastilla.MueblesCastilla.persistance.crud.IUsuarioCrudRepository;
 import es.MueblesCastilla.MueblesCastilla.persistance.mapper.IUsuarioMapper;
-import es.MueblesCastilla.MueblesCastilla.persistance.repository.IUsuarioCrudRepository;
 import lombok.RequiredArgsConstructor;
 /**
  * Repository de Usuario (es el que se conecta a la base de datos DAO)

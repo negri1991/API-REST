@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.MueblesCastilla.MueblesCastilla.domain.dto.UsuarioPojo;
-import es.MueblesCastilla.MueblesCastilla.domain.service.IUsuarioService;
+import es.MueblesCastilla.MueblesCastilla.domain.userCase.IUsuarioUseCase;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -27,7 +27,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
-	private final IUsuarioService iUsuarioService;
+	private final IUsuarioUseCase iUsuarioService;
 
 	/**
 	 * Devuelve lista de usuarios

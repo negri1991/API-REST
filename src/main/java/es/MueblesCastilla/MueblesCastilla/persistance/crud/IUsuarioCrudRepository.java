@@ -1,4 +1,4 @@
-package es.MueblesCastilla.MueblesCastilla.persistance.repository;
+package es.MueblesCastilla.MueblesCastilla.persistance.crud;
 
 import java.util.Optional;
 

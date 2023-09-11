@@ -23,6 +23,13 @@ import lombok.Setter;
 		private double precio;
 		private double total;
 		
+		@ManyToOne
+	    @JoinColumn(name = "compras_id", insertable = false, updatable = false) // Nombre de la columna que representa la relación
+	    private Compra compra;
+		
+		@ManyToOne	
+		@JoinColumn(name = "producto_id", insertable = false, updatable = false)
+		private Producto producto;
 
 
 
@@ -30,15 +37,13 @@ import lombok.Setter;
 
 		}
 
-
-
-		public DetalleCompra(Integer id, String nombre, double cantidad, double precio, double total, Compra compra,
-				Producto producto) {
+		public DetalleCompra(Integer id, double precio, double total, Compra compra, Producto producto) {
 			super();
 			this.id = id;
 			this.precio = precio;
 			this.total = total;
-
+			this.compra = compra;
+			this.producto = producto;
 		}
 
 	}

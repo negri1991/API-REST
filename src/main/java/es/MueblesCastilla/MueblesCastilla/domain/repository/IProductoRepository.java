@@ -20,6 +20,13 @@ public interface IProductoRepository {
 	Optional<ProductoPojo> getProductoById(Integer id);//Optional evita la exception nullPointerException
 
 	/**
+	 * Devuelve un objecto de producto dado su nombre
+	 * @param nombre
+	 * @return Producto
+	 */
+	List<ProductoPojo> findByName(String nombre);
+	
+	/**
 	 * Guarda un producto
 	 * @param newProducto Producto a guardar
 	 * @return Producto guardado
