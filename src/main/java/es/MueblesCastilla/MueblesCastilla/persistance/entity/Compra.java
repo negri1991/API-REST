@@ -11,13 +11,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name ="facturas")
-@Getter
-@Setter
 public class Compra {
 	
 	@Id
@@ -53,5 +49,67 @@ public class Compra {
 		this.usuario = usuario;
 	}
 
+	public Integer getId() {
+		return id;
+	}
 
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public Date getFechaCreacion() {
+		return fechaCreacion;
+	}
+
+	public void setFechaCreacion(Date fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
+	}
+
+	public Date getFechaRecibida() {
+		return fechaRecibida;
+	}
+
+	public void setFechaRecibida(Date fechaRecibida) {
+		this.fechaRecibida = fechaRecibida;
+	}
+
+	public Integer getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
+
+	public List<DetalleCompra> getDetalleCompra() {
+		return detalleCompra;
+	}
+
+	public void setDetalleCompra(List<DetalleCompra> detalleCompra) {
+		this.detalleCompra = detalleCompra;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 }

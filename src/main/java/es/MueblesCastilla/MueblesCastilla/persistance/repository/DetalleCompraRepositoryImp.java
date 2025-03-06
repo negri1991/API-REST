@@ -3,12 +3,13 @@ package es.MueblesCastilla.MueblesCastilla.persistance.repository;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import es.MueblesCastilla.MueblesCastilla.domain.dto.DetalleCompraPojo;
-import es.MueblesCastilla.MueblesCastilla.domain.repository.IDetalleCompraRepository;
-import es.MueblesCastilla.MueblesCastilla.persistance.crud.IDetalleCompraCrudRepository;
-import es.MueblesCastilla.MueblesCastilla.persistance.mapper.IDetalleCompraMapper;
+import es.MueblesCastilla.MueblesCastilla.domain.repository.DetalleCompraRepository;
+import es.MueblesCastilla.MueblesCastilla.persistance.crud.DetalleCompraCrudRepository;
+import es.MueblesCastilla.MueblesCastilla.persistance.mapper.DetalleCompraMapper;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -16,15 +17,21 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 @Repository
-public class DetalleCompraRepository implements IDetalleCompraRepository{
+public class DetalleCompraRepositoryImp implements DetalleCompraRepository{
 	/**
 	 * Crud de detalle compra
 	 */
-	private final IDetalleCompraCrudRepository iDetalleCompraCrudRepository;
+	private final DetalleCompraCrudRepository detalleCompraCrudRepository;
 	/**
 	 * Mapper de detalle compra
 	 */
-	private final IDetalleCompraMapper iDetalleCompraMapper;
+	private final DetalleCompraMapper detalleCompraMapper;
+	
+	@Autowired
+	public DetalleCompraRepositoryImp(DetalleCompraCrudRepository detalleCompraCrudRepository, DetalleCompraMapper detalleCompraMapper) {
+		this.detalleCompraCrudRepository=detalleCompraCrudRepository;
+		this.detalleCompraMapper=detalleCompraMapper;
+	}
 	
     /**
      * Retorna una lista de DetalleCompra transformada a pojo de una lista de entidades
@@ -34,7 +41,7 @@ public class DetalleCompraRepository implements IDetalleCompraRepository{
 	@Override
 	public List<DetalleCompraPojo> getAll() {
 		
-		return iDetalleCompraMapper.toDetalleCompraPojo(iDetalleCompraCrudRepository.findAll());
+		return detalleCompraMapper.toDetalleCompraPojo(detalleCompraCrudRepository.findAll());
 	}
 	
 	/**
@@ -45,7 +52,7 @@ public class DetalleCompraRepository implements IDetalleCompraRepository{
 	@Override
 	public Optional<DetalleCompraPojo> getDetalleCompraById(Integer id) {
 		
-		return iDetalleCompraCrudRepository.findById(id).map(iDetalleCompraMapper::toDetalleCompraPojo);//mapea la interfaz mapper y llama al metodo toDetalleCompra.
+		return detalleCompraCrudRepository.findById(id).map(detalleCompraMapper::toDetalleCompraPojo);//mapea la interfaz mapper y llama al metodo toDetalleCompra.
 		
 //		return iUsuarioCrudRepository.findById(id).map(hola -> iUsuarioMapper.toUsuarioPojo(hola)); Función lambda(programacion funcional).
 	}
@@ -58,7 +65,7 @@ public class DetalleCompraRepository implements IDetalleCompraRepository{
 	@Override
 	public DetalleCompraPojo save(DetalleCompraPojo newDetalleCompra) {
 		
-		return iDetalleCompraMapper.toDetalleCompraPojo(iDetalleCompraCrudRepository.save(iDetalleCompraMapper.toDetalleCompraEntity(newDetalleCompra)));
+		return detalleCompraMapper.toDetalleCompraPojo(detalleCompraCrudRepository.save(detalleCompraMapper.toDetalleCompraEntity(newDetalleCompra)));
 	}
 
 	/**
@@ -68,7 +75,7 @@ public class DetalleCompraRepository implements IDetalleCompraRepository{
 	 */
 	@Override
 	public void delete(Integer idDetalleCompra) {
-		iDetalleCompraCrudRepository.deleteById(idDetalleCompra);
+		detalleCompraCrudRepository.deleteById(idDetalleCompra);
 		
 	}
 	

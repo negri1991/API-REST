@@ -13,8 +13,6 @@ import lombok.Setter;
 
 	@Entity
 	@Table(name="detalleCompra")
-	@Getter
-	@Setter
 	public class DetalleCompra {
 
 		@Id
@@ -46,5 +44,45 @@ import lombok.Setter;
 			this.producto = producto;
 		}
 
+		public Integer getId() {
+			return id;
+		}
+
+		public void setId(Integer id) {
+			this.id = id;
+		}
+
+		public double getPrecio() {
+			return precio;
+		}
+
+		public void setPrecio(double precio) {
+			this.precio = precio;
+		}
+
+		public double getTotal() {
+			return total;
+		}
+
+		public void setTotal(double total) {
+			this.total = total;
+		}
+
+		public Compra getCompra() {
+			return compra;
+		}
+
+		public void setCompra(Compra compra) {
+			this.compra = compra;
+		}
+
+		public Producto getProducto() {
+			return producto;
+		}
+
+		public void setProducto(Producto producto) {
+			this.producto = producto;
+		}
+		
 	}
 

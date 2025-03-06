@@ -1,11 +1,10 @@
-package es.MueblesCastilla.MueblesCastilla.domain.userCase;
+package es.MueblesCastilla.MueblesCastilla.domain.repository;
 
 import java.util.List;
 import java.util.Optional;
-
 import es.MueblesCastilla.MueblesCastilla.domain.dto.UsuarioPojo;
 
-public interface IUsuarioUseCase {
+public interface UsuarioRepository {
 	/**
 	  * Devuelve una lista con todos los usuarios
 	  * @return Lista todos los usuario.
@@ -17,7 +16,7 @@ public interface IUsuarioUseCase {
 	 * @return Optional de usuario
 	 */
 	Optional<UsuarioPojo> getUsuarioById(Integer id);//Optional evita la exception nullPointerException
-	
+
 	/**
 	 * Devuelve un usuario dado su email
 	 * @param email de usuario
@@ -25,6 +24,7 @@ public interface IUsuarioUseCase {
 	 */
 	Optional<UsuarioPojo> getUsuarioByEmail(String email);//Optional evita la exception nullPointerException
 
+	
 	/**
 	 * Guarda un usuario
 	 * @param newUsuario usuario a guardar
@@ -33,18 +33,9 @@ public interface IUsuarioUseCase {
 	UsuarioPojo save(UsuarioPojo newUsuario);
 	
 	/**
-	 * Actualiza un usuario
-	 * @param Recibe un usuario
-	 * @return Devuelve el usuario actualizado
-	 */
-	Optional <UsuarioPojo> update (UsuarioPojo usuario);
-	
-	/**
 	 * Elimina un usuario dado su id
 	 * @param idUsuario Id para eliminar la usuario
 	 */
-	boolean delete (Integer idUsuario);
+	void delete (Integer idUsuario);
 
 }
-
-

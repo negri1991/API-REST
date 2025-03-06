@@ -3,28 +3,37 @@ package es.MueblesCastilla.MueblesCastilla.persistance.repository;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import es.MueblesCastilla.MueblesCastilla.domain.dto.CompraPojo;
-import es.MueblesCastilla.MueblesCastilla.domain.repository.ICompraRepository;
-import es.MueblesCastilla.MueblesCastilla.persistance.crud.ICompraCrudRepository;
-import es.MueblesCastilla.MueblesCastilla.persistance.mapper.ICompraMapper;
-import lombok.RequiredArgsConstructor;
+import es.MueblesCastilla.MueblesCastilla.domain.repository.CompraRepository;
+import es.MueblesCastilla.MueblesCastilla.persistance.crud.CompraCrudRepository;
+import es.MueblesCastilla.MueblesCastilla.persistance.mapper.CompraMapper;
+
 
 /**
  * Repositorio de compra
  */
-@RequiredArgsConstructor
 @Repository
-public class CompraRepository implements ICompraRepository{
+public class CompraRepositoryImp implements CompraRepository{
 	/**
 	 * Crud de compra
 	 */
-	private final ICompraCrudRepository iCompraCrudRepository;
+	private final CompraCrudRepository compraCrudRepository;
+	
 	/**
 	 * Mapper de compra
 	 */
-	private final ICompraMapper iCompraMapper;
+	private final CompraMapper compraMapper;
+	
+	@Autowired
+	public CompraRepositoryImp (CompraCrudRepository compraCrudRepository, CompraMapper compraMapper) {
+		this.compraCrudRepository=compraCrudRepository;
+		this.compraMapper = compraMapper;
+		
+	}
+
 	/*public UsuarioRepository(IUsuarioCrudRepository iUsuarioCrudRepository, IUsuarioMapper iUsuarioMapper) {
 	
 	this.iUsuarioCrudRepository=iUsuarioCrudRepository;
@@ -42,7 +51,7 @@ public class CompraRepository implements ICompraRepository{
 @Override
 public List<CompraPojo> getAll() {
 	
-	return iCompraMapper.toCompraPojo(iCompraCrudRepository.findAll());
+	return compraMapper.toCompraPojo(compraCrudRepository.findAll());
 }
 
 /**
@@ -53,7 +62,7 @@ public List<CompraPojo> getAll() {
 @Override
 public Optional<CompraPojo> getCompraById(Integer id) {
 	
-	return iCompraCrudRepository.findById(id).map(iCompraMapper::toCompraPojo);//mapea la interfaz mapper y llama al metodo toCompraPojo.
+	return compraCrudRepository.findById(id).map(compraMapper::toCompraPojo);//mapea la interfaz mapper y llama al metodo toCompraPojo.
 	
 //	return iUsuarioCrudRepository.findById(id).map(hola -> iUsuarioMapper.toUsuarioPojo(hola)); Función lambda(programacion funcional).
 }
@@ -66,7 +75,7 @@ public Optional<CompraPojo> getCompraById(Integer id) {
 @Override
 public CompraPojo save(CompraPojo newCompra) {
 	
-	return iCompraMapper.toCompraPojo(iCompraCrudRepository.save(iCompraMapper.toCompraEntity(newCompra)));
+	return compraMapper.toCompraPojo(compraCrudRepository.save(compraMapper.toCompraEntity(newCompra)));
 }
 
 /**
@@ -76,7 +85,7 @@ public CompraPojo save(CompraPojo newCompra) {
  */
 @Override
 public void delete(Integer idCompra) {
-	iCompraCrudRepository.deleteById(idCompra);
+	compraCrudRepository.deleteById(idCompra);
 	
 }
 

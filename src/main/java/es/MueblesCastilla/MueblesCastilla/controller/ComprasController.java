@@ -2,6 +2,7 @@ package es.MueblesCastilla.MueblesCastilla.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,20 +15,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.MueblesCastilla.MueblesCastilla.domain.dto.CompraPojo;
-import es.MueblesCastilla.MueblesCastilla.domain.userCase.ICompraUseCase;
-import lombok.RequiredArgsConstructor;
+import es.MueblesCastilla.MueblesCastilla.domain.userCase.CompraService;
 
 /**
- * Controlador rest de compras(Rest es para que devuelva JSON o XML, a
- * diferencia de controller que devuelve HTML).
+ * Controlador rest de compras
  */
-@RequiredArgsConstructor
-@RestController
+@RestController//(Rest es para que devuelva JSON o XML, a diferencia de controller que devuelve HTML).
 @RequestMapping("/compras")
 public class ComprasController {
+	
+	private final CompraService compraService;
 
-	private final ICompraUseCase iCompraService;
-
+    @Autowired
+    public ComprasController(CompraService iCompraService) {
+        this.compraService = iCompraService;
+    }
 	/**
 	 * Devuelve lista de compras
 	 * 
@@ -36,7 +38,7 @@ public class ComprasController {
 	@GetMapping()
 	public ResponseEntity<List<CompraPojo>> getAll() {
 
-		return ResponseEntity.status(HttpStatus.OK).body(iCompraService.getAll());
+		return ResponseEntity.status(HttpStatus.OK).body(compraService.getAll());
 	}
 
 	/**
@@ -48,7 +50,7 @@ public class ComprasController {
 	@GetMapping("/{id}")
 	public ResponseEntity<CompraPojo> getCompraById(@PathVariable Integer id) {
 
-		return ResponseEntity.of(iCompraService.getCompraById(id));
+		return ResponseEntity.of(compraService.getCompraById(id));
 	}
 
 	/**
@@ -63,7 +65,7 @@ public class ComprasController {
 
 		try {
 
-			return ResponseEntity.status(HttpStatus.CREATED).body(iCompraService.save(compraNew));
+			return ResponseEntity.status(HttpStatus.CREATED).body(compraService.save(compraNew));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
@@ -79,7 +81,7 @@ public class ComprasController {
 	@PatchMapping()
 	public ResponseEntity<CompraPojo> update(@RequestBody CompraPojo compraEditada) {
 
-		return ResponseEntity.of(iCompraService.update(compraEditada));
+		return ResponseEntity.of(compraService.update(compraEditada));
 	}
 
 	/**
@@ -91,12 +93,7 @@ public class ComprasController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<CompraPojo> delete(@PathVariable Integer id) {
 
-		return new ResponseEntity<>(this.iCompraService.delete(id) ? HttpStatus.OK : HttpStatus.NOT_FOUND);// Si es
-																											// cierto me
-																											// devuelves
-																											// un ok, si
-																											// no es
-																											// cierto un
-	} // not
-		// found.
+		return new ResponseEntity<>(this.compraService.delete(id) ? HttpStatus.OK : HttpStatus.NOT_FOUND);// Si es cierto me devuelve un ok,
+																											// si no es cierto un not found.																										
+	}
 }

@@ -6,18 +6,20 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import es.MueblesCastilla.MueblesCastilla.domain.dto.DetalleCompraPojo;
-import es.MueblesCastilla.MueblesCastilla.domain.repository.IDetalleCompraRepository;
-import es.MueblesCastilla.MueblesCastilla.domain.userCase.IDetalleCompraUseCase;
-import lombok.RequiredArgsConstructor;
+import es.MueblesCastilla.MueblesCastilla.domain.repository.DetalleCompraRepository;
+import es.MueblesCastilla.MueblesCastilla.domain.userCase.DetalleCompraService;
 
 /**
  * Servicio Usuario (Son todas las validaciones que lleva).
  */
-@RequiredArgsConstructor
 @Service
-public class DetalleCompraService implements IDetalleCompraUseCase{
+public class DetalleCompraServiceImp implements DetalleCompraService{
 	
-	private final IDetalleCompraRepository iDetalleCompraRepository;
+	private final DetalleCompraRepository detalleCompraRepository;
+	
+	public DetalleCompraServiceImp (DetalleCompraRepository detalleCompraRepository) {
+		this.detalleCompraRepository=detalleCompraRepository;
+	}
 	
 	/**
      * Retorna una lista de DetalleCompra transformada a pojo de una lista de entidades
@@ -27,7 +29,7 @@ public class DetalleCompraService implements IDetalleCompraUseCase{
 	@Override
 	public List<DetalleCompraPojo> getAll() {
 		
-		return iDetalleCompraRepository.getAll();
+		return detalleCompraRepository.getAll();
 	}
 
 	/**
@@ -38,7 +40,7 @@ public class DetalleCompraService implements IDetalleCompraUseCase{
 	@Override
 	public Optional<DetalleCompraPojo> getDetalleCompraById(Integer id) {
 		
-		return iDetalleCompraRepository.getDetalleCompraById(id);
+		return detalleCompraRepository.getDetalleCompraById(id);
 	}
 	
 	/**
@@ -48,7 +50,7 @@ public class DetalleCompraService implements IDetalleCompraUseCase{
 	 */
 	@Override
 	public DetalleCompraPojo save(DetalleCompraPojo newDetalleCompra) {
-		return iDetalleCompraRepository.save(newDetalleCompra);
+		return detalleCompraRepository.save(newDetalleCompra);
 	}
 	
 	/**
@@ -59,10 +61,10 @@ public class DetalleCompraService implements IDetalleCompraUseCase{
 	@Override
 	public boolean delete(Integer idDetalleCompra) {
 		
-		if (iDetalleCompraRepository.getDetalleCompraById(idDetalleCompra).isEmpty()) {
+		if (detalleCompraRepository.getDetalleCompraById(idDetalleCompra).isEmpty()) {
 			return false;
 		}
-			iDetalleCompraRepository.delete(idDetalleCompra);
+			detalleCompraRepository.delete(idDetalleCompra);
 			return true;
 	
 		
@@ -76,10 +78,10 @@ public class DetalleCompraService implements IDetalleCompraUseCase{
 	@Override
 	public Optional<DetalleCompraPojo> update(DetalleCompraPojo detalleCompra) {
 		
-		if (iDetalleCompraRepository.getDetalleCompraById(detalleCompra.getId()).isEmpty()) {
+		if (detalleCompraRepository.getDetalleCompraById(detalleCompra.getId()).isEmpty()) {
 			return Optional.empty();
 		}
-		return Optional.of(iDetalleCompraRepository.save(detalleCompra));
+		return Optional.of(detalleCompraRepository.save(detalleCompra));
 		
 	}
 

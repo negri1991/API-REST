@@ -2,6 +2,7 @@ package es.MueblesCastilla.MueblesCastilla.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,20 +15,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.MueblesCastilla.MueblesCastilla.domain.dto.DetalleCompraPojo;
-import es.MueblesCastilla.MueblesCastilla.domain.userCase.IDetalleCompraUseCase;
-import lombok.RequiredArgsConstructor;
+import es.MueblesCastilla.MueblesCastilla.domain.userCase.DetalleCompraService;
 
 /**
  * Controlador rest de DetalleCompraC(Rest es para que devuelva JSON o XML, a
  * diferencia de controller que devuelve HTML).
  */
-@RequiredArgsConstructor
 @RestController
 @RequestMapping("/detallecompra")
 public class DetalleCompraController {
 
-	private final IDetalleCompraUseCase iDetalleCompraService;
-
+	private final DetalleCompraService iDetalleCompraService;
+	
+	@Autowired
+	public DetalleCompraController(DetalleCompraService iDetalleCompraService) {
+		this.iDetalleCompraService = iDetalleCompraService;
+	}
 	/**
 	 * Devuelve lista de DetalleCompra
 	 * 
@@ -91,14 +94,8 @@ public class DetalleCompraController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<DetalleCompraPojo> delete(@PathVariable Integer id) {
 
-		return new ResponseEntity<>(this.iDetalleCompraService.delete(id) ? HttpStatus.OK : HttpStatus.NOT_FOUND);// Si es
-																											// cierto me
-																											// devuelves
-																											// un ok, si
-																											// no es
-																											// cierto un
-																											// not
-																											// found.
+		return new ResponseEntity<>(this.iDetalleCompraService.delete(id) ? HttpStatus.OK : HttpStatus.NOT_FOUND);// Si es cierto me devuelve un ok,
+																												  // si no es cierto un not found.
 	}
 
 }

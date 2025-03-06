@@ -8,7 +8,7 @@ import es.MueblesCastilla.MueblesCastilla.persistance.entity.Usuario;
 /**
  * DAO DATA ACCESS OBJECT (Objeto accesible a la base de datos)
  */
-public interface IUsuarioCrudRepository extends JpaRepository<Usuario, Integer>{
+public interface UsuarioCrudRepository extends JpaRepository<Usuario, Integer>{
 	
 	//Query method
 	//Ahorra--> @Query("select * from usuario where email = ?1 ")

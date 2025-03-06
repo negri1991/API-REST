@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import es.MueblesCastilla.MueblesCastilla.domain.dto.DetalleCompraPojo;
 
-public interface IDetalleCompraUseCase {
+public interface DetalleCompraService {
 	/**
 	  * Devuelve una lista con todos los DetalleCompra
 	  * @return Lista todos los DetalleCompra.

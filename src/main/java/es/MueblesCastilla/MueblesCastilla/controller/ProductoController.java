@@ -14,20 +14,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.MueblesCastilla.MueblesCastilla.domain.dto.ProductoPojo;
-import es.MueblesCastilla.MueblesCastilla.domain.userCase.IProductoUseCase;
-import lombok.RequiredArgsConstructor;
+import es.MueblesCastilla.MueblesCastilla.domain.userCase.ProductoService;
 
 /**
  * Controlador rest de producto(Rest es para que devuelva JSON o XML, a
  * diferencia de controller que devuelve HTML).
  */
-@RequiredArgsConstructor
 @RestController
 @RequestMapping("/producto")
 public class ProductoController {
 
-	private final IProductoUseCase iProductoService;
+	private final ProductoService iProductoService;
 
+	public ProductoController(ProductoService iProductoService) {
+		this.iProductoService=iProductoService;
+	}
 	/**
 	 * Devuelve lista de productos
 	 * 

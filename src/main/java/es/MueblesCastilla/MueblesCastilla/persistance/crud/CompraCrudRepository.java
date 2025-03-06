@@ -6,6 +6,6 @@ import es.MueblesCastilla.MueblesCastilla.persistance.entity.Compra;
 /**
  * DAO DATA ACCESS OBJECT (Objeto accesible a la base de datos)
  */
-public interface ICompraCrudRepository extends JpaRepository<Compra, Integer>{
+public interface CompraCrudRepository extends JpaRepository<Compra, Integer>{
 
 }

@@ -15,19 +15,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.MueblesCastilla.MueblesCastilla.domain.dto.UsuarioPojo;
-import es.MueblesCastilla.MueblesCastilla.domain.userCase.IUsuarioUseCase;
-import lombok.RequiredArgsConstructor;
+import es.MueblesCastilla.MueblesCastilla.domain.userCase.UsuarioService;
 
 /**
  * Controlador rest de usuario(Rest es para que devuelva JSON o XML, a
  * diferencia de controller que devuelve HTML).
  */
-@RequiredArgsConstructor
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
-	private final IUsuarioUseCase iUsuarioService;
+	private final UsuarioService iUsuarioService;
+	
+	public UsuarioController(UsuarioService iUsuarioService) {
+		this.iUsuarioService=iUsuarioService;
+	}
 
 	/**
 	 * Devuelve lista de usuarios

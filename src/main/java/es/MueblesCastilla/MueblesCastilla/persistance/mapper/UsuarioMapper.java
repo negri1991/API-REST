@@ -12,7 +12,7 @@ import es.MueblesCastilla.MueblesCastilla.persistance.entity.Usuario;
 	 * Mapper que transforma objetos de usuario entity a pojos y al inversa
 	 */
 	@Mapper(componentModel = "spring")
-	public interface IUsuarioMapper {
+	public interface UsuarioMapper {
 
 
 	    /**

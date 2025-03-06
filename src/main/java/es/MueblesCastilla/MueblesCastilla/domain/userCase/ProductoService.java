@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import es.MueblesCastilla.MueblesCastilla.domain.dto.ProductoPojo;
 
-public interface IProductoUseCase {
+public interface ProductoService {
 
 	/**
 	  * Devuelve una lista con todos los Producto

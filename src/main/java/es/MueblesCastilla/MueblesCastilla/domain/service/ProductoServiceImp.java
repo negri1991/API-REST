@@ -7,18 +7,20 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import es.MueblesCastilla.MueblesCastilla.domain.dto.ProductoPojo;
-import es.MueblesCastilla.MueblesCastilla.domain.repository.IProductoRepository;
-import es.MueblesCastilla.MueblesCastilla.domain.userCase.IProductoUseCase;
-import lombok.RequiredArgsConstructor;
+import es.MueblesCastilla.MueblesCastilla.domain.repository.ProductoRepository;
+import es.MueblesCastilla.MueblesCastilla.domain.userCase.ProductoService;
 
 	/**
 	 * Servicio Producto (Son todas las validaciones que lleva).
 	 */
-	@RequiredArgsConstructor
 	@Service
-	public class ProductoService implements IProductoUseCase{
+	public class ProductoServiceImp implements ProductoService{
 		
-		private final IProductoRepository iProductoRepository;
+		private final ProductoRepository productoRepository;
+		
+		public ProductoServiceImp (ProductoRepository productoRepository) {
+			this.productoRepository=productoRepository;
+		}
 		
 		/**
 	     * Retorna una lista de Producto transformada a pojo de una lista de entidades
@@ -28,7 +30,7 @@ import lombok.RequiredArgsConstructor;
 		@Override
 		public List<ProductoPojo> getAll() {
 			
-			return iProductoRepository.getAll();
+			return productoRepository.getAll();
 		}
 
 		/**
@@ -39,7 +41,7 @@ import lombok.RequiredArgsConstructor;
 		@Override
 		public Optional<ProductoPojo> getProductoById(Integer id) {
 			
-			return iProductoRepository.getProductoById(id);
+			return productoRepository.getProductoById(id);
 		}
 		
 		/**
@@ -49,8 +51,8 @@ import lombok.RequiredArgsConstructor;
 		 */
 		@Override
 		public List<ProductoPojo> findByName(String nombre) {
-			List<ProductoPojo> productos = iProductoRepository.getAll().stream().filter(p -> p.getNombre().toLowerCase().contains(nombre.toLowerCase()) || p.getNombre().toUpperCase().contains(nombre.toUpperCase())).collect(Collectors.toList());
-			List<ProductoPojo> productos2 = iProductoRepository.getAll().stream().filter(p -> p.getDescripcion().toLowerCase().contains(nombre.toLowerCase()) || p.getDescripcion().toUpperCase().contains(nombre.toUpperCase())).collect(Collectors.toList());
+			List<ProductoPojo> productos = productoRepository.getAll().stream().filter(p -> p.getNombre().toLowerCase().contains(nombre.toLowerCase()) || p.getNombre().toUpperCase().contains(nombre.toUpperCase())).collect(Collectors.toList());
+			List<ProductoPojo> productos2 = productoRepository.getAll().stream().filter(p -> p.getDescripcion().toLowerCase().contains(nombre.toLowerCase()) || p.getDescripcion().toUpperCase().contains(nombre.toUpperCase())).collect(Collectors.toList());
 			productos.addAll(productos2);
 			return productos;
 		}
@@ -62,7 +64,7 @@ import lombok.RequiredArgsConstructor;
 		 */
 		@Override
 		public ProductoPojo save(ProductoPojo newProducto) {
-			return iProductoRepository.save(newProducto);
+			return productoRepository.save(newProducto);
 		}
 		
 		/**
@@ -73,10 +75,10 @@ import lombok.RequiredArgsConstructor;
 		@Override
 		public boolean delete(Integer idProducto) {
 			
-			if (iProductoRepository.getProductoById(idProducto).isEmpty()) {
+			if (productoRepository.getProductoById(idProducto).isEmpty()) {
 				return false;
 			}
-				iProductoRepository.delete(idProducto);
+				productoRepository.delete(idProducto);
 				return true;
 		
 			
@@ -90,10 +92,10 @@ import lombok.RequiredArgsConstructor;
 		@Override
 		public Optional<ProductoPojo> update(ProductoPojo producto) {
 			
-			if (iProductoRepository.getProductoById(producto.getId()).isEmpty()) {
+			if (productoRepository.getProductoById(producto.getId()).isEmpty()) {
 				return Optional.empty();
 			}
-			return Optional.of(iProductoRepository.save(producto));
+			return Optional.of(productoRepository.save(producto));
 			
 		}
 

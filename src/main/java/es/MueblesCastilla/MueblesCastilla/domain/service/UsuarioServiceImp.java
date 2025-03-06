@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import es.MueblesCastilla.MueblesCastilla.domain.dto.UsuarioPojo;
-import es.MueblesCastilla.MueblesCastilla.domain.repository.IUsuarioRepository;
-import es.MueblesCastilla.MueblesCastilla.domain.userCase.IUsuarioUseCase;
+import es.MueblesCastilla.MueblesCastilla.domain.repository.UsuarioRepository;
+import es.MueblesCastilla.MueblesCastilla.domain.userCase.UsuarioService;
 import es.MueblesCastilla.MueblesCastilla.exception.EmailValidationException;
 import lombok.RequiredArgsConstructor;
 
@@ -16,9 +16,13 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 @Service
-public class UsuarioService implements IUsuarioUseCase{
+public class UsuarioServiceImp implements UsuarioService{
 	
-	private final IUsuarioRepository iUsuarioRepository;
+	private final UsuarioRepository usuarioRepository;
+	
+	public UsuarioServiceImp(UsuarioRepository usuarioRepository) {
+		this.usuarioRepository=usuarioRepository;
+	}
 	
 	/**
      * Retorna una lista de usuario transformada a pojo de una lista de entidades
@@ -28,7 +32,7 @@ public class UsuarioService implements IUsuarioUseCase{
 	@Override
 	public List<UsuarioPojo> getAll() {
 		
-		return iUsuarioRepository.getAll();
+		return usuarioRepository.getAll();
 	}
 
 	/**
@@ -39,7 +43,7 @@ public class UsuarioService implements IUsuarioUseCase{
 	@Override
 	public Optional<UsuarioPojo> getUsuarioById(Integer id) {
 		
-		return iUsuarioRepository.getUsuarioById(id);
+		return usuarioRepository.getUsuarioById(id);
 	}
 	
 	/**
@@ -50,7 +54,7 @@ public class UsuarioService implements IUsuarioUseCase{
 	@Override
 	public Optional<UsuarioPojo> getUsuarioByEmail(String email) {
 		
-		return iUsuarioRepository.getUsuarioByEmail(email);
+		return usuarioRepository.getUsuarioByEmail(email);
 	}
 	
 	/**
@@ -69,7 +73,7 @@ public class UsuarioService implements IUsuarioUseCase{
             throw new EmailValidationException();
         
 		}
-		return iUsuarioRepository.save(newUsuario);
+		return usuarioRepository.save(newUsuario);
 	}
 	
 	/**
@@ -80,10 +84,10 @@ public class UsuarioService implements IUsuarioUseCase{
 	@Override
 	public boolean delete(Integer idUsuario) {
 		
-		if (iUsuarioRepository.getUsuarioById(idUsuario).isEmpty()) {
+		if (usuarioRepository.getUsuarioById(idUsuario).isEmpty()) {
 			return false;
 		}
-			iUsuarioRepository.delete(idUsuario);
+			usuarioRepository.delete(idUsuario);
 			return true;
 	
 		
@@ -97,10 +101,10 @@ public class UsuarioService implements IUsuarioUseCase{
 	@Override
 	public Optional<UsuarioPojo> update(UsuarioPojo usuario) {
 		
-		if (iUsuarioRepository.getUsuarioById(usuario.getId()).isEmpty()) {
+		if (usuarioRepository.getUsuarioById(usuario.getId()).isEmpty()) {
 			return Optional.empty();
 		}
-		return Optional.of(iUsuarioRepository.save(usuario));
+		return Optional.of(usuarioRepository.save(usuario));
 		
 	}
 

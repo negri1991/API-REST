@@ -2,12 +2,11 @@ package es.MueblesCastilla.MueblesCastilla.domain.service;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 
 import es.MueblesCastilla.MueblesCastilla.domain.dto.CompraPojo;
-import es.MueblesCastilla.MueblesCastilla.domain.repository.ICompraRepository;
-import es.MueblesCastilla.MueblesCastilla.domain.userCase.ICompraUseCase;
+import es.MueblesCastilla.MueblesCastilla.domain.repository.CompraRepository;
+import es.MueblesCastilla.MueblesCastilla.domain.userCase.CompraService;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -15,9 +14,14 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 @Service
-public class CompraService implements ICompraUseCase{
+public class CompraServiceImp implements CompraService{
 	
-	private final ICompraRepository iCompraRepository;
+	private final CompraRepository compraRepository;
+	
+	public CompraServiceImp(CompraRepository compraRepository) {
+		this.compraRepository=compraRepository;
+	}
+	
 	/**
      * Retorna una lista de compra transformada a pojo de una lista de entidades
      * @param compraEntity Entidad a transformar
@@ -25,8 +29,7 @@ public class CompraService implements ICompraUseCase{
      */
 	@Override
 	public List<CompraPojo> getAll() {
-		
-		return iCompraRepository.getAll();
+		return compraRepository.getAll();
 	}
 
 	/**
@@ -37,7 +40,7 @@ public class CompraService implements ICompraUseCase{
 	@Override
 	public Optional<CompraPojo> getCompraById(Integer id) {
 		
-		return iCompraRepository.getCompraById(id);
+		return compraRepository.getCompraById(id);
 	}
 
 	/**
@@ -48,7 +51,7 @@ public class CompraService implements ICompraUseCase{
 	@Override
 	public CompraPojo save(CompraPojo newCompra) {
 		
-		return iCompraRepository.save(newCompra);
+		return compraRepository.save(newCompra);
 	}
 
 	/**
@@ -59,10 +62,10 @@ public class CompraService implements ICompraUseCase{
 	@Override
 	public Optional<CompraPojo> update(CompraPojo compra) {
 		
-		if (iCompraRepository.getCompraById(compra.getId()).isEmpty()) {
+		if (compraRepository.getCompraById(compra.getId()).isEmpty()) {
 			return Optional.empty();
 		}
-		return Optional.of(iCompraRepository.save(compra));
+		return Optional.of(compraRepository.save(compra));
 		
 	}
 
@@ -74,10 +77,10 @@ public class CompraService implements ICompraUseCase{
 	@Override
 	public boolean delete(Integer idCompra) {
 		
-		if (iCompraRepository.getCompraById(idCompra).isEmpty()) {
+		if (compraRepository.getCompraById(idCompra).isEmpty()) {
 			return false;
 		}
-			iCompraRepository.delete(idCompra);
+			compraRepository.delete(idCompra);
 			return true;
 	
 		

@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * DAO DATA ACCESS OBJECT (Objeto accesible a la base de datos)
  */
-public interface IProductoCrudRepository extends JpaRepository<Producto, Integer>{
+public interface ProductoCrudRepository extends JpaRepository<Producto, Integer>{
 
 	List<Producto> findByNombre(String name);
 }

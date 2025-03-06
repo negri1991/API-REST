@@ -7,25 +7,31 @@ import org.springframework.stereotype.Repository;
 
 
 import es.MueblesCastilla.MueblesCastilla.domain.dto.ProductoPojo;
-import es.MueblesCastilla.MueblesCastilla.domain.repository.IProductoRepository;
-import es.MueblesCastilla.MueblesCastilla.persistance.crud.IProductoCrudRepository;
-import es.MueblesCastilla.MueblesCastilla.persistance.mapper.IProductoMapper;
+import es.MueblesCastilla.MueblesCastilla.domain.repository.ProductoRepository;
+import es.MueblesCastilla.MueblesCastilla.persistance.crud.ProductoCrudRepository;
+import es.MueblesCastilla.MueblesCastilla.persistance.mapper.ProductoMapper;
 import lombok.RequiredArgsConstructor;
 /**
  * Repositorio de Producto (es el que se conecta a la base de datos DAO)
  */
 @RequiredArgsConstructor
 @Repository
-public class ProductoRepository implements IProductoRepository{
+public class ProductoRepositoryImp implements ProductoRepository{
 	/**
 	 * Crud de producto
 	 */
-	private final IProductoCrudRepository iProductoCrudRepository;
+	private final ProductoCrudRepository productoCrudRepository;
 	/**
 	 * Mapper de producto
 	 */
-	private final IProductoMapper iProductoMapper;
+	private final ProductoMapper productoMapper;
+	
 
+	public ProductoRepositoryImp(ProductoCrudRepository productoCrudRepository, ProductoMapper productoMapper) {
+		super();
+		this.productoCrudRepository = productoCrudRepository;
+		this.productoMapper = productoMapper;
+	}
 	/*public UsuarioRepository(IUsuarioCrudRepository iUsuarioCrudRepository, IUsuarioMapper iUsuarioMapper) {
 	
 	this.iUsuarioCrudRepository=iUsuarioCrudRepository;
@@ -43,7 +49,7 @@ public class ProductoRepository implements IProductoRepository{
 @Override
 public List<ProductoPojo> getAll() {
 	
-	return iProductoMapper.toProductoPojo(iProductoCrudRepository.findAll());
+	return productoMapper.toProductoPojo(productoCrudRepository.findAll());
 }
 /**
  * Retorna un opcional dada su id
@@ -53,7 +59,7 @@ public List<ProductoPojo> getAll() {
 @Override
 public Optional<ProductoPojo> getProductoById(Integer id) {
 	
-	return iProductoCrudRepository.findById(id).map(iProductoMapper::toProductoPojo);//mapea la interfaz mapper y llama al metodo toProductoPojo.
+	return productoCrudRepository.findById(id).map(productoMapper::toProductoPojo);//mapea la interfaz mapper y llama al metodo toProductoPojo.
 	
 //	return iUsuarioCrudRepository.findById(id).map(hola -> iUsuarioMapper.toUsuarioPojo(hola)); Función lambda(programacion funcional).
 }
@@ -66,7 +72,7 @@ public Optional<ProductoPojo> getProductoById(Integer id) {
 @Override
 public ProductoPojo save(ProductoPojo newProducto) {
 	
-	return iProductoMapper.toProductoPojo(iProductoCrudRepository.save(iProductoMapper.toProductoEntity(newProducto)));
+	return productoMapper.toProductoPojo(productoCrudRepository.save(productoMapper.toProductoEntity(newProducto)));
 }
 
 /**
@@ -76,12 +82,12 @@ public ProductoPojo save(ProductoPojo newProducto) {
  */
 @Override
 public void delete(Integer idProducto) {
-	iProductoCrudRepository.deleteById(idProducto);
+	productoCrudRepository.deleteById(idProducto);
 	
 }
 @Override
 public List<ProductoPojo> findByName(String nombre) {
-	return iProductoMapper.toProductoPojo(iProductoCrudRepository.findByNombre(nombre));
+	return productoMapper.toProductoPojo(productoCrudRepository.findByNombre(nombre));
 }
 
 }

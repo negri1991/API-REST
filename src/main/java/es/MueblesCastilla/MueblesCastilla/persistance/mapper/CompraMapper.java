@@ -13,7 +13,7 @@ import es.MueblesCastilla.MueblesCastilla.persistance.entity.Compra;
 	 * Mapper que transforma objetos de Compra a pojos o entidades
 	 */
 	@Mapper(componentModel = "spring")
-	public interface ICompraMapper {
+	public interface CompraMapper {
 
 
 	    /**
